@@ -75,14 +75,14 @@ io.on("connection", (socket) => {
         socket.on('videoPlay', ({ videoOn, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPlay', !videoOn );
+                io.to(user.room).emit('videoPlay', { videoOn });
             }
         });
         
         socket.on('videoPause', ({ videoOn, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPause', !videoOn);
+                io.to(user.room).emit('videoPause', { videoOn });
             }
         });
 
