@@ -65,24 +65,17 @@ io.on("connection", (socket) => {
             }
         });
 
-        socket.on('synchronize', ({ currentTime, params }) => {
+        socket.on('videoPlay', ({ currentTime, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('synchronizeVideo', { currentTime });
-            }
-        });
-
-        socket.on('videoPlay', ({ videoOn, params }) => {
-            const user = findUser(params);
-            if (user) {
-                io.to(user.room).emit('videoPlay', { videoOn });
+                io.to(user.room).emit('videoPlay', { currentTime });
             }
         });
         
-        socket.on('videoPause', ({ videoOn, params }) => {
+        socket.on('videoPause', ({ currentTime, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPause', { videoOn });
+                io.to(user.room).emit('videoPause', { currentTime });
             }
         });
 
