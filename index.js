@@ -72,17 +72,17 @@ io.on("connection", (socket) => {
             }
         });
 
-        socket.on('videoPlay', ({ currentTime, params }) => {
+        socket.on('videoPlay', ({ videoOn, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPlay', { currentTime });
+                io.to(user.room).emit('videoPlay', { videoOn });
             }
         });
         
-        socket.on('videoPause', ({ currentTime, params }) => {
+        socket.on('videoPause', ({ videoOn, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPause', { currentTime });
+                io.to(user.room).emit('videoPause', { videoOn });
             }
         });
 
