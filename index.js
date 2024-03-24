@@ -68,14 +68,14 @@ io.on("connection", (socket) => {
         socket.on('videoPlay', ({ currentTime, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPlay', { currentTime });
+                socket.broadcast.to(user.room).emit('videoPlay', { currentTime });
             }
         });
         
         socket.on('videoPause', ({ currentTime, params }) => {
             const user = findUser(params);
             if (user) {
-                io.to(user.room).emit('videoPause', { currentTime });
+                socket.broadcast.to(user.room).emit('videoPause', { currentTime });
             }
         });
 
