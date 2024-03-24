@@ -65,6 +65,13 @@ io.on("connection", (socket) => {
             }
         });
 
+        socket.on('synchronize', ({ currentTime, params }) => {
+            const user = findUser(params);
+            if (user) {
+                io.to(user.room).emit('synchronizeVideo', { currentTime });
+            }
+        });
+
         socket.on('videoPlay', ({ currentTime, params }) => {
             const user = findUser(params);
             if (user) {
